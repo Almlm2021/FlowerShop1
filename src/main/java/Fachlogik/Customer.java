@@ -10,37 +10,38 @@ public class Customer extends User {
     public Customer(int id, String name, String email, String password) {
         super(id, name, email, password);
         this.cart = new Cart();
-        this.orders = new ArrayList<>();
+        this.orders = new ArrayList<Order>();
         this.favoriteProducts = new ArrayList<>();
     }
 
-    void viewShop(Shop shop) {
+    public void viewShop(Warehouse wh) {
         System.out.println("This shop has the following products:");
-        shop.viewProducts();
+        wh.viewWarehouse();
     }
 
-    void sortByColor(Shop shop) {
-        shop.sortByColor();
+    public void sortByColor(Warehouse wh) {
+        wh.sortByColor();
     }
 
-    void sortByPrice(Shop shop) {
-        shop.sortByPrice();
+    public void sortByPrice(Warehouse wh) {
+        wh.sortByPrice();
     }
 
-    void sortByType(Shop shop) {
-        shop.sortByType();
+    public void sortByType(Warehouse wh) {
+        wh.sortByType();
     }
 
-    List<FavoriteProduct> viewFavorites() {
+    public List<FavoriteProduct> viewFavorites() {
         return favoriteProducts;
     }
 
-    void addFavorite(FavoriteProduct fp) {
+    public void addFavorite(FavoriteProduct fp) {
         favoriteProducts.add(fp);
     }
 
-    void removeFavorite(FavoriteProduct fp) {
-        favoriteProducts.remove(fp);
+    public Product removeFavorite(Product fp) {
+         favoriteProducts.remove(fp);
+         return fp;
     }
 
     public Cart getCart() {
@@ -55,8 +56,9 @@ public class Customer extends User {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+
+    public void addOrder(Order o){
+        orders.add(o);
     }
 
     public List<FavoriteProduct> getFavoriteProducts() {

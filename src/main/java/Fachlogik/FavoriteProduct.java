@@ -2,17 +2,18 @@ package Fachlogik;
 
 import java.util.List;
 
-class FavoriteProduct {
+public class FavoriteProduct {
     List<Customer> customer;
     Product product;
 
-    Product getProduct() {
+    public Product getProduct() {
         return product;
     }
 
-    void setProduct(Product product) {
+    public void setProduct(Product product, Customer customer) {
         this.product = product;
     }
+
 
     List<Customer> getCustomers() {
         return customer;

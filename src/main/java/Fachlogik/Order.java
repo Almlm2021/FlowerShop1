@@ -3,15 +3,16 @@ package Fachlogik;
 import java.util.ArrayList;
 import java.util.List;
 
-class Order {
+public class Order {
+    static int x;
     int id;
     Customer customer;
     List<CartItem> cartItems;
     String status;
     boolean isBouquet;
 
-    public Order(int id,String s){
-        this.id = id;
+    public Order(String s){
+        this.id = ++x;
         this.cartItems = new ArrayList<>(cartItems);
         this.status = status;
         this.isBouquet = false;

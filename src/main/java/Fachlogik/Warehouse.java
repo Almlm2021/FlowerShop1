@@ -1,6 +1,7 @@
 package Fachlogik;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Warehouse {
@@ -14,7 +15,7 @@ public class Warehouse {
         products.add(product);
     }
     public Product getProductById(int id){
-        return products.get(id);
+        return products.get(id-1);
     }
 
     public void removeProduct(Product product) {
@@ -35,13 +36,27 @@ public class Warehouse {
         }
     }
 
-    void sortByType() {
+    public void sortByType() {
         products.sort((product1, product2) -> product1.getType().compareTo(product2.getType()));
-        System.out.println("Warehouse products sorted by type:");
+        System.out.println("products sorted by type:");
         for (Product product : products) {
             System.out.println(product);
         }
+    }
+    public void sortByColor() {
+        products.sort(Comparator.comparing(Product::getColor));
+        System.out.println("products sorted by Color:");
+        for (Product product : products) {
+            System.out.println(product);
+        }
+    }
 
+    public void sortByPrice() {
+        products.sort(Comparator.comparingDouble(Product::getPrice));
+        System.out.println("products sorted by Price:");
+        for (Product product : products) {
+            System.out.println(product);
+        }
     }
 
     public List<Product> getProducts() {

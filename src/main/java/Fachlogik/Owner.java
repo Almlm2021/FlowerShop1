@@ -1,40 +1,56 @@
 package Fachlogik;
 
-import java.util.List;
-
 public class Owner extends User {
-    private Shop shop;
+    private Warehouse wh;
 
-    public Owner(int id, String name, String email, String password, Shop shop) {
+    public Owner(int id, String name, String email, String password, Warehouse wh) {
         super(id,name,email,password);
-        this.shop = shop;
+       this.wh=wh;
     }
 
-    public Shop getShop() {
+   /* public Shop getShop() {
         return shop;
     }
+
+
 
     public void setShop(Shop shop) {
         this.shop = shop;
     }
 
+    */
+
     public void addProduct(Product product) {
-        shop.addProduct(product);
+        wh.addProduct(product);
     }
 
     public void removeProduct(Product product) {
-        shop.removeProduct(product);
+        if(product!=null) {
+            wh.removeProduct(product);
+        }else{
+            System.out.println("There is no such Product to remove");
+        }
     }
 
     public void updateProduct(Product product,int quan) {
-        shop.updateProduct(product,quan);
+        if (product != null) {
+            wh.updateProduct(product,quan);
+        }else{
+            System.out.println("There is no such Product to update");
+        }
+
     }
 
-    public List<Product> viewWarehouse() {
-        return shop.getProducts();
+    public void viewWarehouse() {
+        if(wh.products.size()==0){
+            System.out.println("There are no products yet");
+        }
+    for(Product a:wh.products){
+        System.out.println(a);
+    }
     }
 
     public void sortByType() {
-        shop.getProducts().sort((Product p1, Product p2) -> p1.getType().compareTo(p2.getType()));
+        wh.getProducts().sort((Product p1, Product p2) -> p1.getType().compareTo(p2.getType()));
     }
 }

@@ -3,18 +3,18 @@ package Fachlogik;
 import java.util.ArrayList;
 import java.util.List;
 
-class Cart {
+public class Cart {
     List<CartItem> cartItems;
 
     public Cart(){
         this.cartItems=new ArrayList<CartItem>();
     }
-    void addItem(Product product, int quantity) {
+    public void addItem(Product product, int quantity) {
 
        cartItems.add(new CartItem(product, quantity));
     }
 
-    void updateQuantity(Product product, int quantity) {
+    public void updateQuantity(Product product, int quantity) {
         for (CartItem cartItem : cartItems) {
             if (cartItem.getProduct().equals(product)) {
                 cartItem.setQuantity(quantity);
@@ -24,7 +24,7 @@ class Cart {
         System.out.println("Product not found in the cart.");
     }
 
-    void deleteItem(Product product) {
+    public void deleteItem(Product product) {
         cartItems.removeIf(cartItem -> cartItem.getProduct().equals(product));
     }
 
@@ -36,7 +36,7 @@ class Cart {
         return total;
     }
 
-    void viewCart() {
+    public void viewCart() {
         System.out.println("Items in the cart:");
         for (CartItem cartItem : cartItems) {
             System.out.println(cartItem);
