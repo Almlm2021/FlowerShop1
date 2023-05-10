@@ -25,13 +25,13 @@ class CartItem {
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        product.setQuantity(quantity);
     }
     @Override
     public String toString() {
         return "CartItem{" +
-                "product=" + product +
-                ", quantity=" + quantity +
+                "productID="+product.getId()+" name:" + product.getName()+" costs: "+product.getPrice()+
+                ", quantity=" + quantity +"costs: "+getSubtotal()+
                 '}';
     }
 }

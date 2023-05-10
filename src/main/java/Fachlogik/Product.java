@@ -72,7 +72,20 @@ public class Product {
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        if(quantity<0){
+            quantity*=-1;
+            if(this.quantity<quantity){
+                System.out.println("Quantity can't be updated");
+            }else{
+                this.quantity-=quantity;
+                System.out.println(" quantity is updated!");
+            }
+        }else if(quantity==0){
+            System.out.println("you gave no quantity to update!");
+        }else{
+           this.quantity+= quantity;
+            System.out.println("quantity is updated!");
+        }
     }
 }
 

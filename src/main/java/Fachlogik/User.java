@@ -1,13 +1,14 @@
 package Fachlogik;
 
 public abstract class User {
+    static int x;
     int id;
     String name;
     String email;
     String password;
 
-    public User(int id, String name, String email, String password) {
-        this.id=id;
+    public User(String name, String email, String password) {
+        this.id=++x;
         this.name=name;
         this.email=email;
         this.password=password;

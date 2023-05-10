@@ -9,19 +9,25 @@ public class Cart {
     public Cart(){
         this.cartItems=new ArrayList<CartItem>();
     }
-    public void addItem(Product product, int quantity) {
 
-       cartItems.add(new CartItem(product, quantity));
+    public void addItem(Product product, int quantity) {
+        if(product.getQuantity()>=quantity&&quantity>0) {
+            cartItems.add(new CartItem(product, quantity));
+            System.out.println("Item added to the cart.");
+        }else{
+            System.out.println("given Quantity is not available in the shop");
+        }
     }
 
     public void updateQuantity(Product product, int quantity) {
         for (CartItem cartItem : cartItems) {
-            if (cartItem.getProduct().equals(product)) {
+            if (cartItem.getProduct().equals(product)&&cartItem.getProduct().getQuantity()>=quantity) {
                 cartItem.setQuantity(quantity);
+                //System.out.println("Quantity updated");
                 return;
             }
         }
-        System.out.println("Product not found in the cart.");
+       // System.out.println("Quantity couldn't be updated");
     }
 
     public void deleteItem(Product product) {
@@ -41,6 +47,7 @@ public class Cart {
         for (CartItem cartItem : cartItems) {
             System.out.println(cartItem);
         }
+        System.out.println("The total price = "+getTotal());
     }
 
     public List<CartItem> getCartItems() {

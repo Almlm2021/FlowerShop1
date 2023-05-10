@@ -7,8 +7,8 @@ public class Customer extends User {
     Cart cart;
     List<Order> orders;
     List<FavoriteProduct> favoriteProducts;
-    public Customer(int id, String name, String email, String password) {
-        super(id, name, email, password);
+    public Customer( String name, String email, String password) {
+        super( name, email, password);
         this.cart = new Cart();
         this.orders = new ArrayList<Order>();
         this.favoriteProducts = new ArrayList<>();
@@ -20,28 +20,48 @@ public class Customer extends User {
     }
 
     public void sortByColor(Warehouse wh) {
-        wh.sortByColor();
+        if(wh.products.isEmpty()){
+            System.out.println("The Shop is Empty!");
+        }else {
+            wh.sortByColor();
+        }
     }
 
     public void sortByPrice(Warehouse wh) {
-        wh.sortByPrice();
+        if(wh.products.isEmpty()){
+            System.out.println("The Shop is Empty!");
+        }else {
+            wh.sortByPrice();
+        }
     }
 
     public void sortByType(Warehouse wh) {
-        wh.sortByType();
+        if(wh.products.isEmpty()){
+            System.out.println("The Shop is Empty!");
+        }else {
+            wh.sortByType();
+        }
     }
 
     public List<FavoriteProduct> viewFavorites() {
-        return favoriteProducts;
+
+            return favoriteProducts;
+
     }
 
     public void addFavorite(FavoriteProduct fp) {
         favoriteProducts.add(fp);
     }
 
-    public Product removeFavorite(Product fp) {
-         favoriteProducts.remove(fp);
-         return fp;
+    public void removeFavorite(Product fp) {
+        for(FavoriteProduct a:favoriteProducts){
+            if(a.getProduct().getId()==fp.getId())
+                favoriteProducts.remove(a);
+            System.out.println("Product is removed from the favorite");
+            return;
+        }
+        System.out.println("Product not found in the favorite");
+
     }
 
     public Cart getCart() {
@@ -52,8 +72,15 @@ public class Customer extends User {
         this.cart = cart;
     }
 
-    public List<Order> getOrders() {
-        return orders;
+    public void getOrders() {
+        if(orders.isEmpty()){
+            System.out.println("No orders yet");
+         return ;
+        }else {
+           for(Order a:orders){
+               System.out.println(a);
+           }
+        }
     }
 
 
@@ -61,9 +88,9 @@ public class Customer extends User {
         orders.add(o);
     }
 
-    public List<FavoriteProduct> getFavoriteProducts() {
+    /*public List<FavoriteProduct> getFavoriteProducts() {
         return favoriteProducts;
-    }
+    }*/
 
     public void setFavoriteProducts(List<FavoriteProduct> favoriteProducts) {
         this.favoriteProducts = favoriteProducts;

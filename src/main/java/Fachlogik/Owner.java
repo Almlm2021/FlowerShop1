@@ -1,10 +1,12 @@
 package Fachlogik;
 
+import java.util.Comparator;
+
 public class Owner extends User {
     private Warehouse wh;
 
-    public Owner(int id, String name, String email, String password, Warehouse wh) {
-        super(id,name,email,password);
+    public Owner( String name, String email, String password, Warehouse wh) {
+        super(name,email,password);
        this.wh=wh;
     }
 
@@ -44,13 +46,19 @@ public class Owner extends User {
     public void viewWarehouse() {
         if(wh.products.size()==0){
             System.out.println("There are no products yet");
-        }
-    for(Product a:wh.products){
-        System.out.println(a);
-    }
+            return;
+        }else{
+         for(Product a:wh.products) {
+             System.out.println(a);
+         }
+            }
     }
 
     public void sortByType() {
-        wh.getProducts().sort((Product p1, Product p2) -> p1.getType().compareTo(p2.getType()));
+        wh.sortByType();
+    }
+    public void sortByID() {
+       wh.sortByID();
+
     }
 }

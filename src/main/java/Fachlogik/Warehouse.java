@@ -15,7 +15,14 @@ public class Warehouse {
         products.add(product);
     }
     public Product getProductById(int id){
-        return products.get(id-1);
+        Product p=null;
+        for(int i=0;i< products.size();i++){
+            if(products.get(i).getId()==id){
+               p=products.get(i);
+            }
+        }
+
+        return p;
     }
 
     public void removeProduct(Product product) {
@@ -26,6 +33,7 @@ public class Warehouse {
       int productIndex=products.indexOf(product);
       if(productIndex==-1){
           System.out.println("Sorry this product is not found");
+          return;
       }
       products.get(productIndex).setQuantity(q);
     }
@@ -52,11 +60,28 @@ public class Warehouse {
     }
 
     public void sortByPrice() {
-        products.sort(Comparator.comparingDouble(Product::getPrice));
-        System.out.println("products sorted by Price:");
-        for (Product product : products) {
-            System.out.println(product);
+        if(products.size()==0){
+            System.out.println("No products to sort");
+            return;
+        }else {
+            products.sort(Comparator.comparingDouble(Product::getPrice));
+            System.out.println("products sorted by Price:");
+            for (Product product : products) {
+                System.out.println(product);
+            }
         }
+    }
+    public void sortByID() {
+        if(products.size()==0){
+            System.out.println("No products to sort");
+            return;
+        }else {
+            getProducts().sort(Comparator.comparingInt(Product::getId));
+            for (Product product : products) {
+                System.out.println(product);
+            }
+        }
+
     }
 
     public List<Product> getProducts() {
@@ -66,4 +91,5 @@ public class Warehouse {
     public void setProducts(List<Product> products) {
         this.products = products;
     }
+
 }
