@@ -31,7 +31,7 @@ class CartItem {
     public String toString() {
         return "CartItem{" +
                 "productID="+product.getId()+" name:" + product.getName()+" costs: "+product.getPrice()+
-                ", quantity=" + quantity +"costs: "+getSubtotal()+
+                ", quantity=" + quantity +" costs: "+getSubtotal()+
                 '}';
     }
 }

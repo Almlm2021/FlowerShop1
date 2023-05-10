@@ -130,21 +130,22 @@ public class Customer extends User {
     public void cancelOrder(Warehouse warehouse,int id) {
 
       for(Order o:orders){
-          if(o.getId()==id&&o.getStatus().equals("Canceld")){
-              System.out.println("This oredr is already canceled");
+          if(o.getId()==id&&o.getStatus().equals("Canceled")){
+              System.out.println("This order is already canceled");
+
               return;
           }
       }
         Order a1;
         for(Order a:orders){
            if(a.getId()==id){
-               a1=a;
-            a1.setStatus("Canceld");
-           }else{
-               System.out.println("to cancel Order not found");
-               return;
+                a1=a;
+                a1.setStatus("Canceled");
+                System.out.println("The Order with the ID= "+a1.getId()+" has been canceled");
+            return;
            }
         }
+        System.out.println("to cancel Order not found");
 
 
         for (CartItem cartItem : cart.cartItems) {

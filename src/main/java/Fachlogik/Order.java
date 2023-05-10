@@ -68,7 +68,7 @@ public class Order {
         isBouquet = bouquet;
     }
     public String toString(){
-        return "The Order with Id "+getId()+" has been"+getStatus();
+        return "The Order with Id "+getId()+" has been "+getStatus();
     }
 
 }

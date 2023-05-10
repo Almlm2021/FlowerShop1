@@ -29,11 +29,9 @@ public class Cart {
     public void updateQuantity(Product product, int quantity) {
         for (CartItem cartItem : cartItems) {
             if (cartItem.getProduct().equals(product)&&cartItem.getProduct().getQuantity()>=quantity) {
-                //cartItem.setQuantity(quantity);
-                //System.out.println("Quantity updated");
                 if(quantity<0){
                     quantity*=-1;
-                    if(cartItem.quantity<quantity){
+                    if(((cartItem.getQuantity()-quantity)<0)){
                         System.out.println("Quantity can't be updated");
                     }else{
                         cartItem.quantity-=quantity;
@@ -41,7 +39,7 @@ public class Cart {
                     }
                 }else if(quantity==0){
                     System.out.println("you gave no quantity to update!");
-                }else if(((cartItem.getQuantity()+quantity)>product.getQuantity())||((cartItem.getQuantity()-quantity)<0)){
+                }else if(((cartItem.getQuantity()+quantity)>product.getQuantity())){
                     System.out.println("quantity can't be updated!");
                     return;
                 }  else{
@@ -49,9 +47,10 @@ public class Cart {
                     System.out.println("quantity is updated!");
                 }
                 return;
+            }else{
+                System.out.println("quantity isn't available in the shop");
             }
         }
-       // System.out.println("Quantity couldn't be updated");
     }
 
     public void deleteItem(Product product) {
