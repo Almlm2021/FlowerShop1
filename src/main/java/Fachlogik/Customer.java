@@ -82,6 +82,9 @@ public class Customer extends User {
            }
         }
     }
+    public List<Order>getO(){
+        return orders;
+    }
 
     public void addOrder(Order o){
         orders.add(o);
@@ -123,6 +126,35 @@ public class Customer extends User {
                 System.out.println("No Product in the Cart yet");
             }
         }
+    }
+    public void cancelOrder(Warehouse warehouse,int id) {
+
+      for(Order o:orders){
+          if(o.getId()==id&&o.getStatus().equals("Canceld")){
+              System.out.println("This oredr is already canceled");
+              return;
+          }
+      }
+        Order a1;
+        for(Order a:orders){
+           if(a.getId()==id){
+               a1=a;
+            a1.setStatus("Canceld");
+           }else{
+               System.out.println("to cancel Order not found");
+               return;
+           }
+        }
+
+
+        for (CartItem cartItem : cart.cartItems) {
+            Product product = cartItem.getProduct();
+            int quantity = cartItem.getQuantity();
+
+            // Update warehouse quantity
+            warehouse.updateProduct(product, quantity);
+        }
+        System.out.println("Cancel placed successfully.");
     }
 
 }

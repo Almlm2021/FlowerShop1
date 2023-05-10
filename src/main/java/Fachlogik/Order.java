@@ -70,17 +70,5 @@ public class Order {
     public String toString(){
         return "The Order with Id "+getId()+" has been"+getStatus();
     }
-    void cancelOrder(Warehouse warehouse) {
-        setStatus("Canceled");
-        //System.out.println("Cancel placed successfully.");
 
-        for (CartItem cartItem : cart.cartItems) {
-            Product product = cartItem.getProduct();
-            int quantity = cartItem.getQuantity();
-
-            // Update warehouse quantity
-            warehouse.updateProduct(product, quantity);
-        }
-        //cartItems.removeAll(cartItems);
-    }
 }

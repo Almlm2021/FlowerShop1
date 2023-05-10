@@ -11,19 +11,43 @@ public class Cart {
     }
 
     public void addItem(Product product, int quantity) {
-        if(product.getQuantity()>=quantity&&quantity>0) {
-            cartItems.add(new CartItem(product, quantity));
-            System.out.println("Item added to the cart.");
-        }else{
-            System.out.println("given Quantity is not available in the shop");
+        for(CartItem a:cartItems){
+            if(a.product.getId()==product.getId()){
+                System.out.println("The product is already in  the cart. Please update its quantity");
+                return;
+            }
         }
+            if (product.getQuantity() >= quantity && quantity > 0) {
+                cartItems.add(new CartItem(product, quantity));
+                System.out.println("Item added to the cart.");
+            } else {
+                System.out.println("given Quantity is not available in the shop");
+            }
+
     }
 
     public void updateQuantity(Product product, int quantity) {
         for (CartItem cartItem : cartItems) {
             if (cartItem.getProduct().equals(product)&&cartItem.getProduct().getQuantity()>=quantity) {
-                cartItem.setQuantity(quantity);
+                //cartItem.setQuantity(quantity);
                 //System.out.println("Quantity updated");
+                if(quantity<0){
+                    quantity*=-1;
+                    if(cartItem.quantity<quantity){
+                        System.out.println("Quantity can't be updated");
+                    }else{
+                        cartItem.quantity-=quantity;
+                        System.out.println(" quantity is updated!");
+                    }
+                }else if(quantity==0){
+                    System.out.println("you gave no quantity to update!");
+                }else if(((cartItem.getQuantity()+quantity)>product.getQuantity())||((cartItem.getQuantity()-quantity)<0)){
+                    System.out.println("quantity can't be updated!");
+                    return;
+                }  else{
+                    cartItem.quantity+= quantity;
+                    System.out.println("quantity is updated!");
+                }
                 return;
             }
         }
