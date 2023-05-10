@@ -1,5 +1,7 @@
 package GUI;
 
+import Datenhaltung.ApplicationState;
+import Datenhaltung.SerializationUtil;
 import Fachlogik.*;
 
 import java.util.ArrayList;
@@ -8,19 +10,26 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FlowerShopApp {
-    static Shop shop = new Shop();
-    static Warehouse warehouse = new Warehouse();
-    static Owner owner = new Owner( "Alma", "bob@example.com", "password", warehouse);
-    static showOwnerMenu showOwnerMenu=new showOwnerMenu(warehouse);
-    static showCustomerMenu showCustomerMenu=new showCustomerMenu(warehouse,owner);
-
+    static ApplicationState applicationState;
+    static  showCustomerMenu showCustomerMenu;
+    static   showOwnerMenu showOwnerMenu;
+    static  String filePath;
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        List<Customer> customers = new ArrayList<Customer>();
+       filePath = "app_state.ser";
 
-        customers.add(new Customer("Alice", "alice@example.com", "password"));
-        owner.addProduct(new Product("khra",10,"red","re",20));
-        //customers.add(new Customer(2, "Carol", "carol@example.com", "password"));
+        // Load the application state from a file
+       applicationState = SerializationUtil.loadAppStateFromFile(filePath);
+       if(applicationState==null){
+           applicationState=new ApplicationState();
+           SerializationUtil.saveAppStateToFile(applicationState, filePath);
+       }
+        // ... continue using the loadedAppState object
+        showOwnerMenu=new showOwnerMenu(applicationState.getWarehouse());
+        showCustomerMenu=new showCustomerMenu(applicationState.getWarehouse(),applicationState.getOwners());
+        Scanner scanner = new Scanner(System.in);
+        //List<Customer> customers = new ArrayList<Customer>();
+
+
         String customerPassword;
         System.out.println("Welcome to the Flower Shop Application!");
 
@@ -51,24 +60,24 @@ public class FlowerShopApp {
                         //Owner login
                         System.out.println("Please Enter Owner Password");
                         String ownerPassword=scanner.next();
-                        if(owner.getPassword().equals(ownerPassword)) {
-                            currentUser = owner;
+                        if(applicationState.getOwners().getPassword().equals(ownerPassword)) {
+                            currentUser = applicationState.getOwners();
                         }else{
                             System.out.println("Unathorized Access");
                         }
                         break;
                     case 2:
                         //Customer Login
-                        if(customers.isEmpty()){
+                        if(applicationState.getCustomers().isEmpty()){
                             System.out.println("Please register yourself by choosing the Option 3");
                         }else{
                             boolean found=false;
                         System.out.println("Enter Customer Password");
                         customerPassword= scanner.next();
 
-                            for(int i=0;i< customers.size();i++){
-                                if(customers.get(i).getPassword().equals(customerPassword)){
-                                    currentUser = customers.get(i);
+                            for(int i=0;i< applicationState.getCustomers().size();i++){
+                                if(applicationState.getCustomers().get(i).getPassword().equals(customerPassword)){
+                                    currentUser = applicationState.getCustomers().get(i);
                                     found=true;
                                     break;
 
@@ -90,7 +99,7 @@ public class FlowerShopApp {
                         System.out.println("Please enter your Password:");
                         customerPassword=scanner.next();
                        Customer c=new Customer(customerName,customerEmail,customerPassword);
-                       customers.add(c);
+                       applicationState.getCustomers().add(c);
                         break;
                     case 4:
                         running = false;
@@ -107,11 +116,12 @@ public class FlowerShopApp {
 
                 } else if (currentUser instanceof Customer) {
                     System.out.println("welcome "+currentUser.getName());
-                    showCustomerMenu(scanner, (Customer) currentUser, shop);
+                    showCustomerMenu(scanner, (Customer) currentUser);
                     currentUser = null;
 
                 }
             }
+            SerializationUtil.saveAppStateToFile(applicationState, filePath);
         }
 
         scanner.close();
@@ -174,10 +184,11 @@ public class FlowerShopApp {
                 default:
                     System.out.println("Invalid option. Please choose a valid option from the list.");
             }
+            SerializationUtil.saveAppStateToFile(applicationState, filePath);
         }
     }
 
-    private static void showCustomerMenu(Scanner scanner, Customer customer, Shop shop) {
+    private static void showCustomerMenu(Scanner scanner, Customer customer) {
         boolean customerRunning = true;
         while (customerRunning) {
             System.out.println("\n--- Customer Menu ---");
@@ -215,15 +226,15 @@ public class FlowerShopApp {
                     break;
                 case 2:
                     // Sort products by color
-                    customer.sortByColor(warehouse);
+                    customer.sortByColor(applicationState.getWarehouse());
                     break;
                 case 3:
                     // Sort products by price
-                    customer.sortByPrice(warehouse);
+                    customer.sortByPrice(applicationState.getWarehouse());
                     break;
                 case 4:
                     // Sort products by type
-                    customer.sortByType(warehouse);
+                    customer.sortByType(applicationState.getWarehouse());
                     break;
                 case 5:
                     // Add item to cart
@@ -272,6 +283,7 @@ public class FlowerShopApp {
                     System.out.println("Invalid option. Please try again.");
                     break;
             }
+            SerializationUtil.saveAppStateToFile(applicationState, filePath);
         }
     }
 

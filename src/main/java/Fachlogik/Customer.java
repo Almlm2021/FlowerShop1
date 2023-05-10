@@ -1,9 +1,10 @@
 package Fachlogik;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Customer extends User {
+public class Customer extends User implements Serializable {
     Cart cart;
     List<Order> orders;
     List<FavoriteProduct> favoriteProducts;

@@ -1,8 +1,9 @@
 package Fachlogik;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class Owner extends User {
+public class Owner extends User implements Serializable {
     private Warehouse wh;
 
     public Owner( String name, String email, String password, Warehouse wh) {

@@ -1,9 +1,10 @@
 package Fachlogik;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Cart {
+public class Cart implements Serializable {
     List<CartItem> cartItems;
 
     public Cart(){

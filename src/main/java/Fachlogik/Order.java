@@ -1,9 +1,10 @@
 package Fachlogik;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Order {
+public class Order implements Serializable {
     static int x;
     int id;
     //Customer customer;

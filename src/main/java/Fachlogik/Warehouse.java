@@ -1,10 +1,11 @@
 package Fachlogik;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class Warehouse {
+public class Warehouse implements Serializable {
     List<Product> products;
 
     public Warehouse() {

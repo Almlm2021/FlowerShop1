@@ -1,6 +1,8 @@
 package Fachlogik;
 
-class CartItem {
+import java.io.Serializable;
+
+class CartItem implements Serializable {
     Product product;
     int quantity;
 

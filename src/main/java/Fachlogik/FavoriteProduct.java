@@ -1,8 +1,9 @@
 package Fachlogik;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class FavoriteProduct {
+public class FavoriteProduct implements Serializable {
     List<Customer> customer;
     Product product;
 

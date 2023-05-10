@@ -1,6 +1,8 @@
 package Fachlogik;
 
-public abstract class User {
+import java.io.Serializable;
+
+public abstract class User implements Serializable {
     static int x;
     int id;
     String name;
