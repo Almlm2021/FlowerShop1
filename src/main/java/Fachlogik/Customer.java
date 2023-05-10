@@ -83,7 +83,6 @@ public class Customer extends User {
         }
     }
 
-
     public void addOrder(Order o){
         orders.add(o);
     }
@@ -95,7 +94,7 @@ public class Customer extends User {
     public void setFavoriteProducts(List<FavoriteProduct> favoriteProducts) {
         this.favoriteProducts = favoriteProducts;
     }
-    public void placeOrder(Warehouse warehouse) {
+    public void placeOrder(Warehouse warehouse,boolean b) {
         if(warehouse.getProducts().isEmpty()){
             System.out.println("No Product in the Shop yet");
         } else {
@@ -110,7 +109,14 @@ public class Customer extends User {
 
                 }
                 //getCart().cartItems.clear();
-                orders.add(new Order("placed",cart));
+                Order o=null;
+                if(b) {
+                   o = new Order("placed", cart,true);
+                    orders.add(o);
+                }else{
+                     o = new Order("placed", cart,false);
+                    orders.add(o);
+                }
                 this.cart=new Cart();
                 System.out.println("Order placed successfully. ");
             }else{

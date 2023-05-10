@@ -12,38 +12,13 @@ public class Order {
     String status;
     boolean isBouquet;
 
-    public Order(String s,Cart cart){
+    public Order(String s,Cart cart,boolean isBouquet){
         this.id = ++x;
         //this.cartItems = new ArrayList<CartItem>();
         this.status = s;
         this.cart=cart;
-        this.isBouquet = false;
+        this.isBouquet = isBouquet;
     }
-
-        /*public void placeOrder(Warehouse warehouse,Customer customer1,Order o) {
-            if(warehouse.getProducts().isEmpty()){
-                System.out.println("No Product in the Shop yet");
-            } else {
-                if(customer1.getCart().getCartItems().size()>0) {
-                    for (CartItem cartItem :customer1.getCart().getCartItems()) {
-                        Product product = cartItem.getProduct();
-                        int quantity = cartItem.getQuantity();
-                        quantity *= -1;
-
-                        // Update warehouse quantity
-                        warehouse.updateProduct(product, quantity);
-                        customer1.getCart().cartItems.remove(cartItem);
-                    }
-                   o.setStatus("Placed");
-                    System.out.println("Order placed successfully. Order ID: " + getId());
-                    customer1.addOrder(o);
-                }else{
-                    System.out.println("No Product in the Cart yet");
-                }
-            }
-        }
-
-*/
 
 
     void putAsBouquet() {

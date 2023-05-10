@@ -343,7 +343,7 @@ public class FlowerShopApp {
                     break;
                 case 9:
                     // Place order
-                    placeOrder(customer);
+                    placeOrder(scanner,customer);
                     break;
                 case 10:
                     // View favorite products
@@ -436,8 +436,8 @@ public class FlowerShopApp {
     }
 
     public static void viewFavorit(Customer customer){
-        if(warehouse.getProducts().isEmpty()||customer.viewFavorites().size()==0){
-            System.out.println("No Product in the Shop yet");
+        if(warehouse.getProducts().isEmpty()||customer.viewFavorites().isEmpty()){
+            System.out.println("No Favorite yet");
 
         }else {
             List<FavoriteProduct> favoriteProducts = customer.viewFavorites();
@@ -447,7 +447,7 @@ public class FlowerShopApp {
             }
         }
     }
-    public static void placeOrder(Customer customer){
+    public static void placeOrder(Scanner sc,Customer customer){
         /*if(warehouse.getProducts().isEmpty()){
             System.out.println("No Product in the Shop yet");
         }else {
@@ -463,8 +463,17 @@ public class FlowerShopApp {
 
         }*/
         //Order newOrder = new Order("null",customer.getCart());
-        customer.placeOrder(warehouse);
+        System.out.println("as A bouqute?y/n");
+        String b=sc.next();
+        if(b.equals("y")){
+            customer.placeOrder(warehouse,true);
+        }else{
+            customer.placeOrder(warehouse,false);
+        }
+
+
     }
+    //blablabla
     public static void viewCart(Customer customer){
         if(warehouse.getProducts().isEmpty()){
             System.out.println("No Product in the Shop yet");
@@ -538,6 +547,7 @@ public class FlowerShopApp {
             System.out.println("No Product in the Shop yet");
             return;
         }else {
+            viewshop(customer);
             Cart c = new Cart();
             System.out.println("Enter product ID to add to the cart:");
             int productIdToAdd;
