@@ -6,32 +6,33 @@ import java.util.List;
 public class Order {
     static int x;
     int id;
-    Customer customer;
-   List<CartItem> cartItems;
+    //Customer customer;
+   //List<CartItem> cartItems;
     Cart cart;
     String status;
     boolean isBouquet;
 
-    public Order(String s){
+    public Order(String s,Cart cart){
         this.id = ++x;
-        this.cartItems = new ArrayList<CartItem>();
+        //this.cartItems = new ArrayList<CartItem>();
         this.status = s;
+        this.cart=cart;
         this.isBouquet = false;
     }
 
-        public void placeOrder(Warehouse warehouse,Customer customer1,Order o) {
+        /*public void placeOrder(Warehouse warehouse,Customer customer1,Order o) {
             if(warehouse.getProducts().isEmpty()){
                 System.out.println("No Product in the Shop yet");
             } else {
                 if(customer1.getCart().getCartItems().size()>0) {
-                    for (CartItem cartItem : cartItems) {
+                    for (CartItem cartItem :customer1.getCart().getCartItems()) {
                         Product product = cartItem.getProduct();
                         int quantity = cartItem.getQuantity();
                         quantity *= -1;
 
                         // Update warehouse quantity
                         warehouse.updateProduct(product, quantity);
-                        customer.getCart().cartItems.remove(cartItem);
+                        customer1.getCart().cartItems.remove(cartItem);
                     }
                    o.setStatus("Placed");
                     System.out.println("Order placed successfully. Order ID: " + getId());
@@ -42,20 +43,8 @@ public class Order {
             }
         }
 
+*/
 
-    void cancelOrder(Warehouse warehouse) {
-        setStatus("Canceled");
-        //System.out.println("Cancel placed successfully.");
-
-        for (CartItem cartItem : cartItems) {
-            Product product = cartItem.getProduct();
-            int quantity = cartItem.getQuantity();
-
-            // Update warehouse quantity
-            warehouse.updateProduct(product, quantity);
-        }
-        //cartItems.removeAll(cartItems);
-    }
 
     void putAsBouquet() {
         isBouquet=true;
@@ -64,11 +53,11 @@ public class Order {
     void viewOrder() {
         System.out.println("Order details:");
         System.out.println("ID: " + getId());
-        System.out.println("Customer: " + customer.getName());
+        //System.out.println("Customer: " +customer.getName());
         System.out.println("Status: " + getStatus());
         System.out.println("Is bouquet: " + isBouquet);
-        for (CartItem cartItem : cartItems) {
-            System.out.println(cartItem.getProduct());
+        for (CartItem cartItem : cart.cartItems) {
+            System.out.println(cartItem);
         }
     }
 
@@ -80,14 +69,14 @@ public class Order {
         this.id = id;
     }
 
-    public List<CartItem> getCartItems() {
+   /* public List<CartItem> getCartItems() {
         return cartItems;
     }
 
     public void setCartItems(List<CartItem> cartItems) {
         this.cartItems = cartItems;
     }
-
+*/
     public String getStatus() {
         return status;
     }
@@ -105,5 +94,18 @@ public class Order {
     }
     public String toString(){
         return "The Order with Id "+getId()+" has been"+getStatus();
+    }
+    void cancelOrder(Warehouse warehouse) {
+        setStatus("Canceled");
+        //System.out.println("Cancel placed successfully.");
+
+        for (CartItem cartItem : cart.cartItems) {
+            Product product = cartItem.getProduct();
+            int quantity = cartItem.getQuantity();
+
+            // Update warehouse quantity
+            warehouse.updateProduct(product, quantity);
+        }
+        //cartItems.removeAll(cartItems);
     }
 }

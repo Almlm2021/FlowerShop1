@@ -75,10 +75,10 @@ public class Customer extends User {
     public void getOrders() {
         if(orders.isEmpty()){
             System.out.println("No orders yet");
-         return ;
         }else {
            for(Order a:orders){
                System.out.println(a);
+               a.viewOrder();
            }
         }
     }
@@ -95,4 +95,28 @@ public class Customer extends User {
     public void setFavoriteProducts(List<FavoriteProduct> favoriteProducts) {
         this.favoriteProducts = favoriteProducts;
     }
+    public void placeOrder(Warehouse warehouse) {
+        if(warehouse.getProducts().isEmpty()){
+            System.out.println("No Product in the Shop yet");
+        } else {
+            if(getCart().getCartItems().size()>0) {
+                for (CartItem cartItem :getCart().cartItems) {
+                    Product product = cartItem.getProduct();
+                    int quantity = cartItem.getQuantity();
+                    quantity *= -1;
+
+                    // Update warehouse quantity
+                    warehouse.updateProduct(product, quantity);
+
+                }
+                //getCart().cartItems.clear();
+                orders.add(new Order("placed",cart));
+                this.cart=new Cart();
+                System.out.println("Order placed successfully. ");
+            }else{
+                System.out.println("No Product in the Cart yet");
+            }
+        }
+    }
+
 }

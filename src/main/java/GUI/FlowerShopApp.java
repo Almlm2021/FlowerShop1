@@ -462,8 +462,8 @@ public class FlowerShopApp {
             }
 
         }*/
-        Order newOrder = new Order("null");
-        newOrder.placeOrder(warehouse,customer,newOrder);
+        //Order newOrder = new Order("null",customer.getCart());
+        customer.placeOrder(warehouse);
     }
     public static void viewCart(Customer customer){
         if(warehouse.getProducts().isEmpty()){
@@ -499,8 +499,8 @@ public class FlowerShopApp {
         }
     }
     public static void updateQuantityinCart(Scanner scanner,Customer customer){
-        if(warehouse.getProducts().isEmpty()||customer.getCart()==null){
-            System.out.println("No Product in the Shop yet");
+        if(warehouse.getProducts().isEmpty()||customer.getCart().getCartItems().isEmpty()){
+            System.out.println("No Product yet");
         }else {
             customer.getCart().viewCart();
             System.out.println("Enter product ID to update quantity:");
