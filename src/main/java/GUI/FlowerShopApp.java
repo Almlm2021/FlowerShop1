@@ -23,6 +23,7 @@ public class FlowerShopApp {
            applicationState=new ApplicationState();
            SerializationUtil.saveAppStateToFile(applicationState, filePath);
        }
+        applicationState.updateNextIds();
         // ... continue using the loadedAppState object
         showOwnerMenu=new showOwnerMenu(applicationState.getWarehouse());
         showCustomerMenu=new showCustomerMenu(applicationState.getWarehouse(),applicationState.getOwners());

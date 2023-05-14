@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public abstract class User implements Serializable {
     static int x;
+
     int id;
     String name;
     String email;
@@ -46,5 +47,8 @@ public abstract class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public static void setNextId(int nextId) {
+        User.x = nextId;
     }
 }

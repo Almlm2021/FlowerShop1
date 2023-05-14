@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Product implements Serializable {
     static int x;
+
     int id;
     String name;
     double price;
@@ -30,6 +31,9 @@ public class Product implements Serializable {
 
     public int getId() {
         return id;
+    }
+    public static void setNextId(int nextId) {
+        Product.x = nextId;
     }
 
     public void setId(int id) {

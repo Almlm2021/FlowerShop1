@@ -143,20 +143,27 @@ public class Customer extends User implements Serializable {
                 a1=a;
                 a1.setStatus("Canceled");
                 System.out.println("The Order with the ID= "+a1.getId()+" has been canceled");
+               for (CartItem cartItem : cart.cartItems) {
+                   Product product = cartItem.getProduct();
+                   int quantity = cartItem.getQuantity();
+                   // Update warehouse quantity
+                   warehouse.updateProduct(product, quantity);
+               }
+               System.out.println("Cancel placed successfully.");
             return;
            }
         }
         System.out.println("to cancel Order not found");
 
 
-        for (CartItem cartItem : cart.cartItems) {
+        /*for (CartItem cartItem : cart.cartItems) {
             Product product = cartItem.getProduct();
             int quantity = cartItem.getQuantity();
 
             // Update warehouse quantity
             warehouse.updateProduct(product, quantity);
-        }
-        System.out.println("Cancel placed successfully.");
+        }*/
+
     }
 
 }

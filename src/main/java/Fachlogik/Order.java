@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Order implements Serializable {
     static int x;
+
     int id;
     //Customer customer;
    //List<CartItem> cartItems;
@@ -39,6 +40,9 @@ public class Order implements Serializable {
 
     public int getId() {
         return id;
+    }
+    public static void setNextId(int nextId) {
+        Order.x = nextId;
     }
 
     public void setId(int id) {

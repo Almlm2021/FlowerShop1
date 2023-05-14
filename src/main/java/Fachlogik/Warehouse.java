@@ -9,7 +9,7 @@ public class Warehouse implements Serializable {
     List<Product> products;
 
     public Warehouse() {
-        this.products = new ArrayList<>();
+        this.products = new ArrayList<Product>();
     }
 
     public void addProduct(Product product) {

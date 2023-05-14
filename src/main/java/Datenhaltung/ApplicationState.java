@@ -1,9 +1,6 @@
 package Datenhaltung;
 
-import Fachlogik.Customer;
-import Fachlogik.Owner;
-import Fachlogik.Product;
-import Fachlogik.Warehouse;
+import Fachlogik.*;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,11 +10,13 @@ public class ApplicationState implements Serializable {
     private Warehouse warehouse;
     private List<Customer> customers;
     private Owner owners;
-
+    private List<Order> orders;
+    private int c;
     public ApplicationState() {
         warehouse = new Warehouse();
         customers = new ArrayList<>();
         owners = new Owner("Alma", "bob@example.com", "password", warehouse);
+        orders=new ArrayList<Order>();
     }
 
     // Getter and setter methods for warehouse, customers, and owners
@@ -25,6 +24,14 @@ public class ApplicationState implements Serializable {
     //Customers
     public void addCustomer(Customer customer) {
         customers.add(customer);
+    }
+
+    public List<Order> getOrder() {
+        return orders;
+    }
+
+    public void setOrder(List<Order> order) {
+        this.orders = order;
     }
 
     public void removeCustomer(Customer customer) {
@@ -64,6 +71,16 @@ public class ApplicationState implements Serializable {
         warehouse.removeProduct(product);
     }
 
+    public void updateNextIds() {
+        int maxProductId = warehouse.getProducts().stream().mapToInt(Product::getId).max().orElse(0);
+        Product.setNextId(maxProductId);
+
+        int maxUserId = customers.stream().mapToInt(User::getId).max().orElse(0);
+        User.setNextId(maxUserId);
+
+        int maxOrderId = orders.stream().mapToInt(Order::getId).max().orElse(0);
+        Order.setNextId(maxOrderId);
+    }
 
 
 
