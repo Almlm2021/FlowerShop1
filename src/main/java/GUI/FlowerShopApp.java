@@ -123,6 +123,7 @@ public class FlowerShopApp {
                 }
             }
             SerializationUtil.saveAppStateToFile(applicationState, filePath);
+            applicationState.updateNextIds();
         }
 
         scanner.close();
@@ -186,6 +187,7 @@ public class FlowerShopApp {
                     System.out.println("Invalid option. Please choose a valid option from the list.");
             }
             SerializationUtil.saveAppStateToFile(applicationState, filePath);
+            applicationState.updateNextIds();
         }
     }
 
@@ -285,6 +287,7 @@ public class FlowerShopApp {
                     break;
             }
             SerializationUtil.saveAppStateToFile(applicationState, filePath);
+            applicationState.updateNextIds();
         }
     }
 

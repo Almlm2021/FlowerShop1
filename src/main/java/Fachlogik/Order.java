@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order implements Serializable {
-    static int x;
+    //static int x;
 
     int id;
     //Customer customer;
@@ -14,8 +14,8 @@ public class Order implements Serializable {
     String status;
     boolean isBouquet;
 
-    public Order(String s,Cart cart,boolean isBouquet){
-        this.id = ++x;
+    public Order(int x,String s,Cart cart,boolean isBouquet){
+        this.id = x;
         //this.cartItems = new ArrayList<CartItem>();
         this.status = s;
         this.cart=cart;
@@ -41,9 +41,7 @@ public class Order implements Serializable {
     public int getId() {
         return id;
     }
-    public static void setNextId(int nextId) {
-        Order.x = nextId;
-    }
+
 
     public void setId(int id) {
         this.id = id;

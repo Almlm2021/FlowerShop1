@@ -10,13 +10,13 @@ public class ApplicationState implements Serializable {
     private Warehouse warehouse;
     private List<Customer> customers;
     private Owner owners;
-    private List<Order> orders;
+    //private List<Order> orders;
     private int c;
     public ApplicationState() {
         warehouse = new Warehouse();
         customers = new ArrayList<>();
         owners = new Owner("Alma", "bob@example.com", "password", warehouse);
-        orders=new ArrayList<Order>();
+        //orders=new ArrayList<Order>();
     }
 
     // Getter and setter methods for warehouse, customers, and owners
@@ -26,13 +26,13 @@ public class ApplicationState implements Serializable {
         customers.add(customer);
     }
 
-    public List<Order> getOrder() {
+    /*public List<Order> getOrder() {
         return orders;
     }
 
     public void setOrder(List<Order> order) {
         this.orders = order;
-    }
+    }*/
 
     public void removeCustomer(Customer customer) {
         customers.remove(customer);
@@ -78,8 +78,6 @@ public class ApplicationState implements Serializable {
         int maxUserId = customers.stream().mapToInt(User::getId).max().orElse(0);
         User.setNextId(maxUserId);
 
-        int maxOrderId = orders.stream().mapToInt(Order::getId).max().orElse(0);
-        Order.setNextId(maxOrderId);
     }
 
 

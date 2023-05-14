@@ -115,10 +115,10 @@ public class Customer extends User implements Serializable {
                 //getCart().cartItems.clear();
                 Order o=null;
                 if(b) {
-                   o = new Order("placed", cart,true);
+                   o = new Order(orders.size()+1,"placed", cart,true);
                     orders.add(o);
                 }else{
-                     o = new Order("placed", cart,false);
+                     o = new Order(orders.size()+1,"placed", cart,false);
                     orders.add(o);
                 }
                 this.cart=new Cart();
@@ -138,15 +138,17 @@ public class Customer extends User implements Serializable {
           }
       }
         Order a1;
+        //System.out.println("size"+orders.size());
         for(Order a:orders){
            if(a.getId()==id){
                 a1=a;
                 a1.setStatus("Canceled");
                 System.out.println("The Order with the ID= "+a1.getId()+" has been canceled");
-               for (CartItem cartItem : cart.cartItems) {
+               for (CartItem cartItem : a.cart.cartItems) {
                    Product product = cartItem.getProduct();
                    int quantity = cartItem.getQuantity();
                    // Update warehouse quantity
+                   System.out.println("cartItems quantity:"+quantity);
                    warehouse.updateProduct(product, quantity);
                }
                System.out.println("Cancel placed successfully.");
@@ -154,15 +156,6 @@ public class Customer extends User implements Serializable {
            }
         }
         System.out.println("to cancel Order not found");
-
-
-        /*for (CartItem cartItem : cart.cartItems) {
-            Product product = cartItem.getProduct();
-            int quantity = cartItem.getQuantity();
-
-            // Update warehouse quantity
-            warehouse.updateProduct(product, quantity);
-        }*/
 
     }
 

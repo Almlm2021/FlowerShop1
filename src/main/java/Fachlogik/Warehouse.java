@@ -36,6 +36,7 @@ public class Warehouse implements Serializable {
           System.out.println("Sorry this product is not found");
           return;
       }
+        System.out.println("updateProduct in");
       products.get(productIndex).setQuantity(q);
     }
     void viewWarehouse() {
