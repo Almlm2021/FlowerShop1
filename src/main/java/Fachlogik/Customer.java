@@ -113,14 +113,8 @@ public class Customer extends User implements Serializable {
 
                 }
                 //getCart().cartItems.clear();
-                Order o=null;
-                if(b) {
-                   o = new Order(orders.size()+1,"placed", cart,true);
-                    orders.add(o);
-                }else{
-                     o = new Order(orders.size()+1,"placed", cart,false);
-                    orders.add(o);
-                }
+                  Order  o = new Order(orders.size()+1,"placed", cart,b);
+                orders.add(o);
                 this.cart=new Cart();
                 System.out.println("Order placed successfully. ");
             }else{
@@ -137,13 +131,13 @@ public class Customer extends User implements Serializable {
               return;
           }
       }
-        Order a1;
+        //Order a1;
         //System.out.println("size"+orders.size());
         for(Order a:orders){
            if(a.getId()==id){
-                a1=a;
-                a1.setStatus("Canceled");
-                System.out.println("The Order with the ID= "+a1.getId()+" has been canceled");
+
+                a.setStatus("Canceled");
+                System.out.println("The Order with the ID= "+a.getId()+" has been canceled");
                for (CartItem cartItem : a.cart.cartItems) {
                    Product product = cartItem.getProduct();
                    int quantity = cartItem.getQuantity();
